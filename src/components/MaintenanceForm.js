@@ -28,25 +28,26 @@ const MaintenanceForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const finalCar = selectedCar === "__new__" ? customCar : selectedCar;
-
+  
     const formData = new FormData();
-    formData.append("car", finalCar); // käytetään lopullista arvoa
+    formData.append("car", finalCar);
     formData.append("description", description);
     formData.append("km", km);
     formData.append("date", date);
     if (image) {
       formData.append("image", image);
     }
-
+  
     try {
       await axios.post("http://localhost:5000/api/maintenance", formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
+          // ÄLÄ LISÄÄ Content-Type, Axios hoitaa sen automaattisesti FormDatesta!
         },
       });
-
+  
       setSelectedCar("");
       setCustomCar("");
       setDescription("");
@@ -55,9 +56,10 @@ const MaintenanceForm = () => {
       setImage(null);
       window.location.reload();
     } catch (err) {
-      console.error("❌ POST error:", err);
+      console.error("❌ POST error:", err.response?.data || err.message);
     }
   };
+  
 
   return (
     <div>

@@ -6,10 +6,16 @@ const MaintenanceList = () => {
   const [modalImage, setModalImage] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("token"); // Tarkista onko token olemassa ennen kuin haetaan huollot
-    if (!token) {
-      fetchMaintenances();
-    }
+    const fetchMaintenances = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/maintenance");
+        console.log("Huoltojen response:", res.data);  // 🐞 Näkyykö data?
+        setMaintenances(res.data);
+      } catch (err) {
+        console.error("GET error:", err.response?.data || err.message);
+      }
+    };
+    fetchMaintenances();
   }, []);
 
   const fetchMaintenances = async () => {
