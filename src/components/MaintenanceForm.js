@@ -17,7 +17,7 @@ const MaintenanceForm = () => {
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        const res = await axios.get("https://autonhuolto-backend.onrender.com/api/cars");
+        const res = await axios.get("https://autonhuoltoback.onrender.com/api/cars");
         setCarOptions(res.data);
         } catch (err) {
           console.error("Autolistan haku epäonnistui:", err);
@@ -41,7 +41,7 @@ const MaintenanceForm = () => {
     }
   
     try {
-      await axios.post("https://autonhuolto-backend.onrender.com/api/maintenance", formData, {
+      await axios.post("https://autonhuoltoback.onrender.com/api/maintenance", formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           // ÄLÄ LISÄÄ Content-Type, Axios hoitaa sen automaattisesti FormDatesta!
