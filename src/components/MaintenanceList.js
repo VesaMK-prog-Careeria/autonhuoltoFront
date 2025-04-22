@@ -8,7 +8,7 @@ const MaintenanceList = () => {
   useEffect(() => {
     const fetchMaintenances = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/maintenance");
+        const res = await axios.get("https://autonhuolto-backend.onrender.com/api/maintenance");
         console.log("Huoltojen response:", res.data);  // 🐞 Näkyykö data?
         setMaintenances(res.data);
       } catch (err) {
@@ -30,7 +30,7 @@ const MaintenanceList = () => {
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`http://127.0.0.1:5000/api/maintenance/${id}`, {
+    await axios.delete(`https://autonhuolto-backend.onrender.com/api/maintenance/${id}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -38,7 +38,7 @@ const MaintenanceList = () => {
     fetchMaintenances(); // Päivitä lista poistamisen jälkeen
   };
   const openModal = (filename) => {
-    setModalImage(`http://localhost:5000/uploads/${filename}`);
+    setModalImage(`https://autonhuolto-backend.onrender.com/uploads/${filename}`);
   };
 
   const closeModal = () => {
