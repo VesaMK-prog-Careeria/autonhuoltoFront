@@ -6,37 +6,39 @@ const MaintenanceList = () => {
   const [modalImage, setModalImage] = useState(null);
 
   useEffect(() => {
-    const fetchMaintenances = async () => {
-      try {
-        const res = await axios.get("https://autonhuolto-backend.onrender.com/api/maintenance");
-        console.log("Huoltojen response:", res.data);  // 🐞 Näkyykö data?
-        setMaintenances(res.data);
-      } catch (err) {
-        console.error("GET error:", err.response?.data || err.message);
-      }
-    };
     fetchMaintenances();
   }, []);
 
   const fetchMaintenances = async () => {
     const token = localStorage.getItem("token");
     console.log("Haetaan huollot tokenilla:", token);
-    const res = await axios.get("http://localhost:5000/api/maintenance", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-    setMaintenances(res.data);
+
+    try {
+      const res = await axios.get("https://autonhuolto-backend.onrender.com/api/maintenance", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log("Huoltojen response:", res.data);
+      setMaintenances(res.data);
+    } catch (err) {
+      console.error("GET error:", err.response?.data || err.message);
+    }
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`https://autonhuolto-backend.onrender.com/api/maintenance/${id}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
-    fetchMaintenances(); // Päivitä lista poistamisen jälkeen
+    try {
+      await axios.delete(`https://autonhuolto-backend.onrender.com/api/maintenance/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      fetchMaintenances();
+    } catch (err) {
+      console.error("DELETE error:", err.response?.data || err.message);
+    }
   };
+
   const openModal = (filename) => {
     setModalImage(`https://autonhuolto-backend.onrender.com/uploads/${filename}`);
   };
@@ -62,11 +64,11 @@ const MaintenanceList = () => {
       {modalImage && (
         <div style={modalStyle}>
           <div style={modalContentStyle}>
-          <img src={modalImage} alt="Huoltokuva" style={{ maxWidth: "100%", borderRadius: "8px" }} />
+            <img src={modalImage} alt="Huoltokuva" style={{ maxWidth: "100%", borderRadius: "8px" }} />
             <button onClick={closeModal}>Sulje</button>
           </div>
-          </div>
-        )}
+        </div>
+      )}
     </div>
   );
 };
