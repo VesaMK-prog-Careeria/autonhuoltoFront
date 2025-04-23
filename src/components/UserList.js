@@ -41,6 +41,7 @@ const UserList = () => {
   return (
     <div>
       <h2>Käyttäjähallinta</h2>
+      <p>Voit lisätä ja poistaa käyttäjiä.</p>
       <UserForm onUserAdded={fetchUsers} />
       <ul>
         {users.map((user) => (
