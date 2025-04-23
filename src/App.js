@@ -4,11 +4,13 @@ import MaintenanceList from "./components/MaintenanceList";
 import LoginForm from "./components/LoginForm";
 import UserList from "./components/UserList";
 import UserForm from "./components/UserForm";
+import Navbar from "./components/Navbar";
 import "./App.css";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
+  const [view, setView] = useState("form"); // oletusnäkymä
 
   // Tarkista onko token olemassa
   useEffect(() => {
@@ -37,21 +39,10 @@ const App = () => {
     <div>
       {isLoggedIn ? (
         <>
-          <h2>Tervetuloa, {username}!</h2>
-          <button onClick={handleLogout}>Kirjaudu ulos</button>
-          <h2>Huoltolomake</h2>
-          <p>Voit lisätä uuden huollon alla olevasta lomakkeesta.</p>
-          <MaintenanceForm />
-          <hr />
-          <h2>Huoltolista</h2>
-          <p>Alla näet kaikki huollot, jotka on lisätty järjestelmään.</p>
-          <MaintenanceList />
-          <hr />
-          <h2>Käyttäjien hallinta</h2>
-          <p>Voit lisätä ja poistaa käyttäjiä alla olevasta lomakkeesta.</p>
-          <UserList />
-          <UserForm />
-          
+          <Navbar currentView={view} setView={setView} onLogout={handleLogout} username={username} />
+          {view === "form" && <MaintenanceForm />}
+          {view === "list" && <MaintenanceList />}
+          {view === "users" && <UserList />}
         </>
       ) : (
         <LoginForm onLoginSuccess={handleLoginSuccess} />
