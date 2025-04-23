@@ -1,12 +1,10 @@
+// src/components/UserList.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import UserForm from "./UserForm";
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    fetchUsers();
-  }, []);
 
   const fetchUsers = async () => {
     try {
@@ -18,7 +16,7 @@ const UserList = () => {
       });
       setUsers(res.data);
     } catch (err) {
-      console.error("❌ Käyttäjien haku epäonnistui:", err.response?.data || err.message);
+      console.error("❌ Käyttäjien haku epäonnistui:", err);
     }
   };
 
@@ -30,19 +28,24 @@ const UserList = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      fetchUsers(); // päivitä lista
+      fetchUsers(); // Päivitä lista
     } catch (err) {
-      console.error("❌ Käyttäjän poisto epäonnistui:", err.response?.data || err.message);
+      console.error("❌ Käyttäjän poisto epäonnistui:", err);
     }
   };
 
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
   return (
     <div>
-      <h2>Käyttäjät</h2>
+      <h2>Käyttäjähallinta</h2>
+      <UserForm onUserAdded={fetchUsers} />
       <ul>
         {users.map((user) => (
           <li key={user.id}>
-            {user.username}{" "}
+            {user.username}
             <button onClick={() => handleDelete(user.id)}>Poista</button>
           </li>
         ))}
