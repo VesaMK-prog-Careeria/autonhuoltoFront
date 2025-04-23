@@ -39,15 +39,15 @@ const App = () => {
         <>
           <h2>Tervetuloa, {username}!</h2>
           <button onClick={handleLogout}>Kirjaudu ulos</button>
-          <h3>Huoltolomake</h3>
+          <h2>Huoltolomake</h2>
           <p>Voit lisätä uuden huollon alla olevasta lomakkeesta.</p>
           <MaintenanceForm />
           <hr />
-          <h3>Huoltolista</h3>
+          <h2>Huoltolista</h2>
           <p>Alla näet kaikki huollot, jotka on lisätty järjestelmään.</p>
           <MaintenanceList />
           <hr />
-          <h3>Käyttäjien hallinta</h3>
+          <h2>Käyttäjien hallinta</h2>
           <p>Voit lisätä ja poistaa käyttäjiä alla olevasta lomakkeesta.</p>
           <UserList />
           <UserForm />
