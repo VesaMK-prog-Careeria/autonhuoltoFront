@@ -3,6 +3,7 @@ import MaintenanceForm from "./components/MaintenanceForm";
 import MaintenanceList from "./components/MaintenanceList";
 import LoginForm from "./components/LoginForm";
 import UserList from "./components/UserList";
+import UserForm from "./components/UserForm";
 import "./App.css";
 
 const App = () => {
@@ -41,7 +42,11 @@ const App = () => {
           <MaintenanceForm />
           <MaintenanceList />
           <hr />
+          <h3>Huoltojen ja käyttäjien hallinta</h3>
+          <p>Voit lisätä ja poistaa huoltoja ja käyttäjiä alla olevista lomakkeista.</p>
           <UserList />
+          <UserForm />
+          
         </>
       ) : (
         <LoginForm onLoginSuccess={handleLoginSuccess} />
