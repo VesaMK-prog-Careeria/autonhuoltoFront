@@ -49,7 +49,6 @@ const MaintenanceList = () => {
 
   return (
     <div>
-      <h2>Huoltolista</h2>
       <ul>
         {maintenances.map((m) => (
           <li key={m.id}>
