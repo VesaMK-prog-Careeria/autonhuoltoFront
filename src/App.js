@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import MaintenanceForm from "./components/MaintenanceForm";
 import MaintenanceList from "./components/MaintenanceList";
 import LoginForm from "./components/LoginForm";
+import UserList from "./components/UserList";
 import "./App.css";
 
 const App = () => {
@@ -39,6 +40,8 @@ const App = () => {
           <button onClick={handleLogout}>Kirjaudu ulos</button>
           <MaintenanceForm />
           <MaintenanceList />
+          <hr />
+          <UserList />
         </>
       ) : (
         <LoginForm onLoginSuccess={handleLoginSuccess} />
