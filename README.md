@@ -15,25 +15,29 @@ Kirjautua sisään ja ulos
 📦 Projektin käynnistys paikallisesti
 1. Kloonaa repo:
 
-git clone <REPO-OSOITE>
-cd autonhuolto-frontend
+    git clone <REPO-OSOITE>
+
+    cd autonhuolto-frontend
 
 2. Asenna riippuvuudet:
 
-npm install
+    npm install
 
 3. Käynnistä kehityspalvelin:
 
-npm start
+    npm start
 
 4. Frontend oletusarvoisesti pyörii osoitteessa:
-http://localhost:3000
+
+    http://localhost:3000
 
 ⚙️ Ympäristömuuttujat
+
 Käyttöön voidaan lisätä .env-tiedosto esim. näin:
 
-REACT_APP_BACKEND_URL=https://autonhuoltoback.onrender.com
-Sovellus hakee backendin osoitteen tästä muuttujasta.
+    REACT_APP_BACKEND_URL=https://autonhuoltoback.onrender.com
+
+    Sovellus hakee backendin osoitteen tästä muuttujasta.
 
 🧪 Teknologiat
     React
