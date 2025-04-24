@@ -35,18 +35,6 @@ Käyttöön voidaan lisätä .env-tiedosto esim. näin:
 REACT_APP_BACKEND_URL=https://autonhuoltoback.onrender.com
 Sovellus hakee backendin osoitteen tästä muuttujasta.
 
-📁 Hakemistorakenne
-
-src/
-├── components/
-│   ├── LoginForm.js
-│   ├── MaintenanceForm.js
-│   ├── MaintenanceList.js
-│   ├── UserForm.js
-│   └── UserList.js
-├── App.js
-└── index.js
-
 🧪 Teknologiat
     React
 
