@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+// LoginForm-komponentti, joka käsittelee käyttäjän kirjautumisen
+// ja näyttää virheilmoitukset tarvittaessa.
 const LoginForm = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  // Funktio, joka käsittelee kirjautumislomakkeen lähettämisen
+  // ja tekee POST-pyynnön palvelimelle käyttäjätunnuksen ja salasanan kanssa.
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -14,6 +18,8 @@ const LoginForm = ({ onLoginSuccess }) => {
         password,
       });
 
+      // Jos kirjautuminen onnistuu, tallennetaan token ja käyttäjätunnus localStorageen
+      // ja kutsutaan parent-komponentin funktiota onLoginSuccess.
       const { token, username: returnedUsername } = res.data;
 
       // Tallenna token localStorageen

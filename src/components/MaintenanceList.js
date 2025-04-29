@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+// MaintenanceList-komponentti, joka hakee ja näyttää huoltotiedot
+// sekä mahdollistaa niiden poistamisen ja kuvien katselun.
 const MaintenanceList = () => {
   const [maintenances, setMaintenances] = useState([]);
   const [modalImage, setModalImage] = useState(null);
@@ -9,6 +11,7 @@ const MaintenanceList = () => {
     fetchMaintenances();
   }, []);
 
+  // Hakee huoltotiedot palvelimelta ja asettaa ne maintenances-tilaan.
   const fetchMaintenances = async () => {
     const token = localStorage.getItem("token");
     console.log("Haetaan huollot tokenilla:", token);
@@ -20,7 +23,7 @@ const MaintenanceList = () => {
         },
       });
       console.log("Huoltojen response:", res.data);
-      setMaintenances(res.data);
+      setMaintenances(res.data); // Asetetaan huoltotiedot tilaan
     } catch (err) {
       console.error("GET error:", err.response?.data || err.message);
     }
@@ -63,8 +66,17 @@ const MaintenanceList = () => {
       {modalImage && (
         <div style={modalStyle}>
           <div style={modalContentStyle}>
-            <img src={modalImage} alt="Huoltokuva" style={{ maxWidth: "100%", borderRadius: "8px" }} />
-            <button onClick={closeModal}>Sulje</button>
+          <button onClick={closeModal} style={closeButtonStyle}>×</button>
+            <img 
+              src={modalImage} 
+              alt="Huoltokuva" 
+              style={{ 
+                maxWidth: "100%",
+                maxHeight: "100%",
+                objectFit: "contain", 
+                borderRadius: "8px" 
+              }} 
+            />
           </div>
         </div>
       )}
@@ -72,25 +84,32 @@ const MaintenanceList = () => {
   );
 };
 
-const modalStyle = {
-  position: "fixed",
-  top: 0, left: 0, right: 0, bottom: 0,
-  backgroundColor: "rgba(0,0,0,0.7)",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  zIndex: 1000,
-};
-
 const modalContentStyle = {
   background: "#fff",
   padding: "1rem",
   borderRadius: "10px",
-  maxWidth: "90%",
-  maxHeight: "90%",
+  width: "80vw",
+  height: "80vh",
   overflow: "auto",
   boxShadow: "0 0 15px rgba(0,0,0,0.3)",
-  position: "relative"
+  position: "relative",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+};
+
+const closeButtonStyle = {
+  position: "absolute",
+  top: "10px",
+  right: "10px",
+  backgroundColor: "#f44336",
+  color: "white",
+  border: "none",
+  borderRadius: "50%",
+  width: "30px",
+  height: "30px",
+  cursor: "pointer",
+  fontWeight: "bold",
 };
 
 export default MaintenanceList;

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-
+// MaintenanceForm-komponentti, joka käsittelee huoltotietojen lisäämistä
+// ja näyttää lomakkeen käyttäjälle. Käyttää Axiosia tietojen lähettämiseen palvelimelle.
 const MaintenanceForm = () => {
   //const [car, setCar] = useState("");
   const [description, setDescription] = useState("");
@@ -12,13 +13,13 @@ const MaintenanceForm = () => {
   const [selectedCar, setSelectedCar] = useState("");
   const [customCar, setCustomCar] = useState("");
 
-
-
+  // Hakee autolistauksen palvelimelta ja asettaa sen carOptions-tilaan
+  // Tämä tapahtuu vain kerran komponentin latautuessa (tyhjät riippuvuudet []).
   useEffect(() => {
     const fetchCars = async () => {
       try {
         const res = await axios.get("https://autonhuoltoback.onrender.com/api/cars");
-        setCarOptions(res.data);
+        setCarOptions(res.data); // Tässä tallenetaan autot carOptions-muuttujaan
         } catch (err) {
           console.error("Autolistan haku epäonnistui:", err);
       }
@@ -26,9 +27,13 @@ const MaintenanceForm = () => {
     fetchCars();
   }, []);
 
+  // Funktio, joka käsittelee lomakkeen lähettämisen
+  // ja lähettää tiedot palvelimelle POST-pyynnöllä.
   const handleSubmit = async (e) => {
     e.preventDefault();
   
+    // Tarkistetaan, onko käyttäjä valinnut uuden auton vai olemassa olevan
+    // Jos uusi auto, käytetään customCar-tilaa, muuten käytetään selectedCar-tilaa
     const finalCar = selectedCar === "__new__" ? customCar : selectedCar;
   
     const formData = new FormData();
@@ -70,7 +75,7 @@ const MaintenanceForm = () => {
         <label>Auto:</label>
         <select value={selectedCar} onChange={(e) => setSelectedCar(e.target.value)} required>
           <option value="">Valitse auto tai lisää uusi</option>
-          {carOptions.map((c, index) => (
+          {carOptions.map((c, index) => ( // rakennetetaan lista autoista
             <option key={index} value={c}>{c}</option>
       ))}
       <option value="__new__">+ Lisää uusi auto</option>
@@ -108,7 +113,7 @@ const MaintenanceForm = () => {
         <input
           type="file"
           accept="image/*"
-          capture="environment"
+          capture="environment" // Käytetään kameraa mobiililaitteissa
           onChange={(e) => setImage(e.target.files[0])}
         />
         <button type="submit">Lisää</button>
