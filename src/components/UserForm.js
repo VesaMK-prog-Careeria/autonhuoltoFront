@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+// UserForm-komponentti, joka mahdollistaa uuden käyttäjän lisäämisen
+// ja lähettää tiedot palvelimelle POST-pyynnöllä.
 const UserForm = ({ onUserAdded }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -9,7 +11,7 @@ const UserForm = ({ onUserAdded }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://autonhuoltoback.onrender.com/api/register", {
+      await axios.post("http://autonhuolto.duckdns.org:5000/api/register", {
         username,
         password,
       });

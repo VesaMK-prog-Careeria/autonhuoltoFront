@@ -18,7 +18,7 @@ const MaintenanceForm = () => {
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        const res = await axios.get("https://autonhuoltoback.onrender.com/api/cars");
+        const res = await axios.get("http://autonhuolto.duckdns.org:5000/api/cars");
         setCarOptions(res.data); // Tässä tallenetaan autot carOptions-muuttujaan
         } catch (err) {
           console.error("Autolistan haku epäonnistui:", err);
@@ -46,7 +46,7 @@ const MaintenanceForm = () => {
     }
   
     try {
-      await axios.post("https://autonhuoltoback.onrender.com/api/maintenance", formData, {
+      await axios.post("http://autonhuolto.duckdns.org:5000/api/maintenance", formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           // ÄLÄ LISÄÄ Content-Type, Axios hoitaa sen automaattisesti FormDatesta!

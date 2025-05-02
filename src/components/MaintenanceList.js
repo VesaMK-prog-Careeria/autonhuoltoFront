@@ -17,7 +17,8 @@ const MaintenanceList = () => {
     console.log("Haetaan huollot tokenilla:", token);
 
     try {
-      const res = await axios.get("https://autonhuoltoback.onrender.com/api/maintenance", {
+      const res = await axios.get("http://autonhuolto.duckdns.org:5000/api/maintenance", {
+      //const res = await axios.get("https://autonhuoltoback.onrender.com/api/maintenance", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -31,7 +32,8 @@ const MaintenanceList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://autonhuoltoback.onrender.com/api/maintenance/${id}`, {
+      await axios.delete(`http://autonhuolto.duckdns.org:5000/api/maintenance/${id}`, {
+      //await axios.delete(`https://autonhuoltoback.onrender.com/api/maintenance/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -43,7 +45,8 @@ const MaintenanceList = () => {
   };
 
   const openModal = (filename) => {
-    setModalImage(`https://autonhuoltoback.onrender.com/uploads/${filename}`);
+    setModalImage(`http://autonhuolto.duckdns.org:5000/uploads/${filename}`);
+    //setModalImage(`https://autonhuoltoback.onrender.com/uploads/${filename}`);
   };
 
   const closeModal = () => {

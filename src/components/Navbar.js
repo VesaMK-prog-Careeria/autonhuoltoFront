@@ -1,6 +1,8 @@
 // src/components/Navbar.js
 import React from "react";
 
+// Käsin tehty Navbar-komponentti, joka näyttää navigointipalkin
+// ja mahdollistaa käyttäjän siirtymisen eri näkymiin (lomake, lista, käyttäjät).
 const Navbar = ({ currentView, setView, onLogout, username }) => {
   return (
     <nav style={styles.nav}>
