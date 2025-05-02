@@ -11,7 +11,7 @@ const UserForm = ({ onUserAdded }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://autonhuolto.duckdns.org:5000/api/register", {
+      await axios.post("https://autonhuoltoback.onrender.com/api/register", {
         username,
         password,
       });

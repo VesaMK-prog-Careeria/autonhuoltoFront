@@ -46,7 +46,7 @@ const MaintenanceForm = () => {
     }
   
     try {
-      await axios.post("http://autonhuolto.duckdns.org:5000/api/maintenance", formData, {
+      await axios.post("https://autonhuoltoback.onrender.com/api/maintenance", formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           // ÄLÄ LISÄÄ Content-Type, Axios hoitaa sen automaattisesti FormDatesta!

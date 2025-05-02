@@ -13,7 +13,7 @@ const LoginForm = ({ onLoginSuccess }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://autonhuolto.duckdns.org:5000/api/login", {
+      const res = await axios.post("https://autonhuoltoback.onrender.com/api/login", {
         username,
         password,
       });
