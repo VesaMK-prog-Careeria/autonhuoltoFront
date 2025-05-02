@@ -18,7 +18,7 @@ const MaintenanceForm = () => {
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        const res = await axios.get("http://autonhuolto.duckdns.org:5000/api/cars");
+        const res = await axios.get("https://autonhuoltoback.onrender.com/api/cars");
         setCarOptions(res.data); // Tässä tallenetaan autot carOptions-muuttujaan
         } catch (err) {
           console.error("Autolistan haku epäonnistui:", err);
